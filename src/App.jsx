@@ -5,6 +5,7 @@ import Cart from './Pages/Cart'
 import { LoginSignup } from './Pages/LoginSignup';
 import { Product} from './Pages/Product'
 import Signup from './Pages/Signup';
+import Shop from './Pages/Shop';
 
 
 
@@ -13,6 +14,7 @@ function App() {
     <div>
       <Navbar/>
       <Routes>
+      <Route path="/" element={<Shop/>}/>
         <Route path='/mens' element={<ShopCategory/>}/>
         <Route path='/womens' element={<ShopCategory/>}/>
         <Route path='/kids' element={<ShopCategory/>}/>
