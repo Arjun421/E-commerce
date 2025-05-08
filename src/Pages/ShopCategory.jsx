@@ -1,18 +1,18 @@
 import React, { useState, useEffect } from 'react';
 import "../CSS/ShopCategory.css";
 
-const ShopCategory = () => {
+const ShopCategory = ({ category }) => {
   const [products, setProducts] = useState([]);
-  const [originalProducts, setOriginalProducts] = useState([]); // to reset if needed
+  const [originalProducts, setOriginalProducts] = useState([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
 
+  // Fetch all products once
   useEffect(() => {
     fetch('https://fakestoreapi.com/products')
       .then(res => res.json())
       .then(data => {
-        setProducts(data);
-        setOriginalProducts(data); // store original
+        setOriginalProducts(data);
         setLoading(false);
       })
       .catch(err => {
@@ -20,6 +20,18 @@ const ShopCategory = () => {
         setLoading(false);
       });
   }, []);
+
+  // Filter products based on exact category match
+  useEffect(() => {
+    if (category) {
+      const filteredProducts = originalProducts.filter(product =>
+        product.category.toLowerCase() === category.toLowerCase()
+      );
+      setProducts(filteredProducts);
+    } else {
+      setProducts(originalProducts);
+    }
+  }, [category, originalProducts]);
 
   const handleSortChange = (e) => {
     const value = e.target.value;
@@ -29,8 +41,6 @@ const ShopCategory = () => {
       sortedProducts.sort((a, b) => a.price - b.price);
     } else if (value === 'high') {
       sortedProducts.sort((a, b) => b.price - a.price);
-    } else {
-      sortedProducts = [...originalProducts];
     }
 
     setProducts(sortedProducts);
@@ -46,7 +56,7 @@ const ShopCategory = () => {
 
   return (
     <div className="shopcategory-container">
-      <h1>🛍️Store Products</h1>
+      <h1>🛍️ Store Products</h1>
 
       <div className="shopcategory-indexSort">
         <p><span>Sort By:</span></p>
@@ -58,14 +68,18 @@ const ShopCategory = () => {
       </div>
 
       <div className="shopcategory-products">
-        {products.map((product) => (
-          <div className="shopcategory-card" key={product.id}>
-            <img src={product.image} alt={product.title} />
-            <div className="title">{product.title}</div>
-            <div className="price">${product.price}</div>
-            <div className="description">{product.description.slice(0, 100)}...</div>
-          </div>
-        ))}
+        {products.length > 0 ? (
+          products.map((product) => (
+            <div className="shopcategory-card" key={product.id}>
+              <img src={product.image} alt={product.title} />
+              <div className="title">{product.title}</div>
+              <div className="price">${product.price}</div>
+              <div className="description">{product.description.slice(0, 100)}...</div>
+            </div>
+          ))
+        ) : (
+          <p>No products found in this category.</p>
+        )}
       </div>
 
       <div className="shopcategory-loadmore">
@@ -76,6 +90,3 @@ const ShopCategory = () => {
 };
 
 export default ShopCategory;
-
-
-
