@@ -6,6 +6,9 @@ import { LoginSignup } from './Pages/LoginSignup';
 import { Product } from './Pages/Product';
 import Signup from './Pages/Signup';
 import Shop from './Pages/Shop';
+import Footer from './Components/Footer/Footer';
+
+
 
 function App() {
   return (
@@ -22,6 +25,8 @@ function App() {
         <Route path='/products' element={<Product />} />
         <Route path='/signup' element={<Signup />} />
       </Routes>
+      <Footer/>
+      
     </div>
   );
 }
