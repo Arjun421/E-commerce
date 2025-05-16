@@ -33,10 +33,10 @@ const Footer = () => {
         <div className="footer-section">
           <h4>Connect With Us</h4>
           <div className="social-icons">
-            <a href="#"><i className="fa fa-facebook"></i></a>
-            <a href="#"><i className="fa fa-twitter"></i></a>
-            <a href="#"><i className="fa fa-instagram"></i></a>
-            <a href="#"><i className="fa fa-linkedin"></i></a>
+            <p className="number">+91 3487383236</p><br />
+            <p className="gmail">grabsy1@gmail.com</p><br />
+            <a href="#"><i className="instagram">Instagram</i></a><br/>
+            <a href="#"><i className="linkedin"></i>Linkedln</a>
           </div>
         </div>
       </div>
