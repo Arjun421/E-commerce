@@ -10,8 +10,9 @@ import Footer from './Components/Footer/Footer';
 import About from './Pages/About';
 import Terms from './Pages/Terms';
 import Return from './Pages/Return';
-// import ContactUs from './Pages/ContactUs';
-
+import Contact from './Pages/Contact';
+import FAQ from './Pages/FAQ';
+import Support from './Pages/Support';
 function App() {
   return (
     <div>
@@ -28,7 +29,11 @@ function App() {
         <Route path='/about' element={<About />}/>
         <Route path="/terms" element={<Terms />} />
         <Route path="/returns" element={<Return />} />
-        {/* <Route path="/contact" element={<ContactUs />} /> */}
+        <Route path="/contact" element={<Contact />} />
+        <Route path="/faq" element={<FAQ />} />
+        <Route path="/support" element={<Support />} />
+
+        
       </Routes>
       <Footer/>
       
