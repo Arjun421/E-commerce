@@ -1,4 +1,4 @@
-import { Route, Routes } from 'react-router-dom';
+import { Route, Routes, useLocation } from 'react-router-dom';
 import Navbar from './Components/Navbar/Navbar';
 import ShopCategory from './Pages/ShopCategory';
 import Cart from './Pages/Cart';
@@ -13,31 +13,42 @@ import Return from './Pages/Return';
 import Contact from './Pages/Contact';
 import FAQ from './Pages/FAQ';
 import Support from './Pages/Support';
+import { CartProvider } from './Context/CartContext';  // <-- Updated path here
+import Feedback from './Pages/Feedback';
+import Checkout from './Pages/Checkout';
 function App() {
-  return (
-    <div>
-      <Navbar />
-      <Routes>
-        <Route path="/" element={<Shop />} />
-        <Route path="/mens" element={<ShopCategory category="men's clothing" />} />
-        <Route path="/womens" element={<ShopCategory category="women's clothing" />} />
-        <Route path="/kids" element={<ShopCategory category="jewelery" />} />
-        <Route path='/cart' element={<Cart />} />
-        <Route path='/login' element={<LoginSignup />} />
-        <Route path='/products' element={<Product />} />
-        <Route path='/signup' element={<Signup />} />
-        <Route path='/about' element={<About />}/>
-        <Route path="/terms" element={<Terms />} />
-        <Route path="/returns" element={<Return />} />
-        <Route path="/contact" element={<Contact />} />
-        <Route path="/faq" element={<FAQ />} />
-        <Route path="/support" element={<Support />} />
+  const location = useLocation();
 
-        
-      </Routes>
-      <Footer/>
-      
-    </div>
+  // Determine if current path is /cart
+  const hideFooter = location.pathname === '/cart' || location.pathname==='/feedback';
+
+  return (
+    <CartProvider>
+      <div>
+        <Navbar />
+        <Routes>
+          <Route path="/" element={<Shop />} />
+          <Route path="/mens" element={<ShopCategory category="men's clothing" />} />
+          <Route path="/womens" element={<ShopCategory category="women's clothing" />} />
+          <Route path="/jewelery" element={<ShopCategory category="jewelery" />} />
+          <Route path="/cart" element={<Cart />} />
+          <Route path="/login" element={<LoginSignup />} />
+          <Route path="/products" element={<Product />} />
+          <Route path="/signup" element={<Signup />} />
+          <Route path="/about" element={<About />} />
+          <Route path="/terms" element={<Terms />} />
+          <Route path="/returns" element={<Return />} />
+          <Route path="/contact" element={<Contact />} />
+          <Route path="/faq" element={<FAQ />} />
+          <Route path="/support" element={<Support />} />
+          <Route path="/feedback" element={<Feedback />} />
+          <Route path="/checkout" element={<Checkout />} />
+        </Routes>
+
+        {/* Conditionally render Footer only if NOT on /cart */}
+        {!hideFooter && <Footer />}
+      </div>
+    </CartProvider>
   );
 }
 

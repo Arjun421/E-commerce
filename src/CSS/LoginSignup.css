@@ -83,4 +83,28 @@
     cursor: pointer;
     text-decoration: underline;
   }
+  @media (max-width: 480px) {
+    .loginsignup-container {
+      padding: 30px 20px;
+      max-width: 90%;
+    }
   
+    h1 {
+      font-size: 24px;
+    }
+  
+    .loginsignup-fields input {
+      font-size: 14px;
+      padding: 10px;
+    }
+  
+    button.primary-btn {
+      padding: 12px;
+      font-size: 14px;
+    }
+  
+    .loginsignup-login,
+    .loginsignup-agree {
+      font-size: 12px;
+    }
+  }

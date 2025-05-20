@@ -1,13 +1,19 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useContext } from 'react';
+import { CartContext } from '../Context/CartContext';
 import "../CSS/ShopCategory.css";
+
+const sizes = ['XS', 'S', 'M', 'L', 'XL', 'XXL'];
 
 const ShopCategory = ({ category }) => {
   const [products, setProducts] = useState([]);
   const [originalProducts, setOriginalProducts] = useState([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
+  const [selectedProduct, setSelectedProduct] = useState(null);
+  const [selectedSize, setSelectedSize] = useState(null);
 
-  // Fetch all products once
+  const { addToCart } = useContext(CartContext);
+
   useEffect(() => {
     fetch('https://fakestoreapi.com/products')
       .then(res => res.json())
@@ -15,13 +21,12 @@ const ShopCategory = ({ category }) => {
         setOriginalProducts(data);
         setLoading(false);
       })
-      .catch(err => {
+      .catch(() => {
         setError('Failed to load products');
         setLoading(false);
       });
   }, []);
 
-  // Filter products based on exact category match
   useEffect(() => {
     if (category) {
       const filteredProducts = originalProducts.filter(product =>
@@ -44,6 +49,22 @@ const ShopCategory = ({ category }) => {
     }
 
     setProducts(sortedProducts);
+  };
+
+  const openProductDetail = (product) => {
+    setSelectedProduct(product);
+    setSelectedSize(null);
+  };
+
+  const closeProductDetail = () => {
+    setSelectedProduct(null);
+  };
+
+  const handleAddToCart = () => {
+    if (!selectedSize) return;
+    addToCart({ ...selectedProduct, size: selectedSize, quantity: 1 });
+    alert(`Added ${selectedProduct.title} (Size: ${selectedSize}) to cart!`);
+    setSelectedProduct(null);
   };
 
   if (loading) {
@@ -70,7 +91,12 @@ const ShopCategory = ({ category }) => {
       <div className="shopcategory-products">
         {products.length > 0 ? (
           products.map((product) => (
-            <div className="shopcategory-card" key={product.id}>
+            <div
+              className="shopcategory-card"
+              key={product.id}
+              onClick={() => openProductDetail(product)}
+              style={{ cursor: 'pointer' }}
+            >
               <img src={product.image} alt={product.title} />
               <div className="title">{product.title}</div>
               <div className="price">${product.price}</div>
@@ -82,9 +108,41 @@ const ShopCategory = ({ category }) => {
         )}
       </div>
 
-      <div className="shopcategory-loadmore">
-        <button>Load More</button>
-      </div>
+      {selectedProduct && (
+        <div className="modal-overlay" onClick={closeProductDetail}>
+          <div className="modal-content" onClick={e => e.stopPropagation()}>
+            <button className="modal-close" onClick={closeProductDetail}>✖</button>
+            <img src={selectedProduct.image} alt={selectedProduct.title} className="modal-image" />
+            <h2>{selectedProduct.title}</h2>
+            <h3>${selectedProduct.price}</h3>
+            <p>{selectedProduct.description}</p>
+
+            <div className="size-selector">
+              <p>Select Size:</p>
+              <div className="sizes">
+                {sizes.map(size => (
+                  <button
+                    key={size}
+                    className={`size-btn ${selectedSize === size ? 'selected' : ''}`}
+                    onClick={() => setSelectedSize(size)}
+                  >
+                    {size}
+                  </button>
+                ))}
+              </div>
+            </div>
+
+            <button
+              className="add-to-cart-btn"
+              disabled={!selectedSize}
+              onClick={handleAddToCart}
+            >
+              Add to Cart
+            </button>
+          </div>
+        </div>
+      )}
+
     </div>
   );
 };

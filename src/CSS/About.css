@@ -1,55 +1,104 @@
 .about-section {
-    background-color: #fefefe;
-    padding: 60px 20px;
-    font-family: 'Segoe UI', sans-serif;
-    color: #333;
-  }
-  
-  .about-container {
-    max-width: 900px;
-    margin: auto;
-    text-align: center;
-  }
-  
+  background-color: #fefefe;
+  padding: 60px 20px;
+  font-family: 'Segoe UI', sans-serif;
+  color: #333;
+}
+
+.about-container {
+  max-width: 900px;
+  margin: auto;
+  text-align: center;
+}
+
+.about-container h2 {
+  font-size: 36px;
+  margin-bottom: 20px;
+  color: #222;
+}
+
+.about-container p {
+  font-size: 18px;
+  line-height: 1.7;
+  margin-bottom: 16px;
+  color: #555;
+}
+
+.highlight {
+  color: #e91e63;
+  font-weight: 600;
+}
+
+.about-metrics {
+  display: flex;
+  justify-content: center;
+  gap: 40px;
+  margin-top: 50px;
+  flex-wrap: wrap;
+}
+
+.metric-box {
+  text-align: center;
+  min-width: 120px;
+}
+
+.metric-box h3 {
+  font-size: 30px;
+  color: #e91e63;
+  margin-bottom: 8px;
+}
+
+.metric-box p {
+  font-size: 16px;
+  color: #666;
+}
+
+/* Responsive styles */
+@media (max-width: 768px) {
   .about-container h2 {
-    font-size: 36px;
-    margin-bottom: 20px;
-    color: #222;
+    font-size: 28px;
   }
-  
+
   .about-container p {
-    font-size: 18px;
-    line-height: 1.7;
-    margin-bottom: 16px;
-    color: #555;
-  }
-  
-  .highlight {
-    color: #e91e63;
-    font-weight: 600;
-  }
-  
-  .about-metrics {
-    display: flex;
-    justify-content: center;
-    gap: 40px;
-    margin-top: 50px;
-    flex-wrap: wrap;
-  }
-  
-  .metric-box {
-    text-align: center;
-    min-width: 120px;
-  }
-  
-  .metric-box h3 {
-    font-size: 30px;
-    color: #e91e63;
-    margin-bottom: 8px;
-  }
-  
-  .metric-box p {
     font-size: 16px;
-    color: #666;
   }
-  
+
+  .metric-box h3 {
+    font-size: 26px;
+  }
+
+  .metric-box p {
+    font-size: 14px;
+  }
+}
+
+@media (max-width: 480px) {
+  .about-section {
+    padding: 40px 15px;
+  }
+
+  .about-container h2 {
+    font-size: 24px;
+  }
+
+  .about-container p {
+    font-size: 14px;
+  }
+
+  .about-metrics {
+    flex-direction: column;
+    gap: 25px;
+  }
+
+  .metric-box {
+    min-width: auto;
+  }
+
+  .metric-box h3 {
+    font-size: 22px;
+  }
+
+  .metric-box p {
+    font-size: 13px;
+  }
+}

@@ -14,7 +14,7 @@ const Footer = () => {
           <h4>Quick Links</h4>
           <ul>
             <li><a href="/">Home</a></li>
-            <li><a href="/shop">Shop</a></li>
+            <li><a href="/feedback">Feedback</a></li>
             <li><a href="/about">About Us</a></li>
             <li><a href="/contact">Contact</a></li>
           </ul>
@@ -35,8 +35,8 @@ const Footer = () => {
           <div className="social-icons">
             <p className="number">+91 3487383236</p><br />
             <p className="gmail">grabsy1@gmail.com</p><br />
-            <a href="#"><i className="instagram">Instagram</i></a><br/>
-            <a href="#"><i className="linkedin"></i>Linkedln</a>
+            
+            <a href="https://www.linkedin.com/in/arjun-singh-rathore-33154a323/"><i className="linkedin"></i>Linkedln</a>
           </div>
         </div>
       </div>
