@@ -1,0 +1,9 @@
+.link-text {
+    color: #ff4141;
+    font-weight: 500;
+    cursor: pointer;
+  }
+  .link-text:hover {
+    text-decoration: underline;
+  }
+  

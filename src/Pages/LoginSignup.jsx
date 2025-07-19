@@ -1,51 +1,4 @@
-// import React from 'react';
-// import "../CSS/LoginSignup.css";
 
-// export const LoginSignup = () => {
-//   return (
-//     <div className="loginsignup">
-//       <div className="loginsignup-container">
-//         <h1>Create Your Account</h1>
-        
-//         <div className="loginsignup-fields">
-//           <input 
-//             type="text" 
-//             placeholder="Full Name" 
-//             aria-label="Full Name" 
-//             required 
-//           />
-          
-//           <input 
-//             type="email" 
-//             placeholder="Email Address" 
-//             aria-label="Email Address" 
-//             required 
-//           />
-          
-//           <input 
-//             type="password" 
-//             placeholder="Create Password" 
-//             aria-label="Create Password" 
-//             required 
-//           />
-          
-//           <button className="primary-btn">Sign Up</button>
-//         </div>
-
-//         <p className="loginsignup-login">
-//           Already have an account? <span className="link-text">Login here</span>
-//         </p>
-
-//         <div className="loginsignup-agree">
-//           <input type="checkbox" id="agree" aria-label="Agree to Terms" />
-//           <label htmlFor="agree">
-//             By continuing, I agree to the <span className="link-text">Terms of Use</span> and <span className="link-text">Privacy Policy</span>.
-//           </label>
-//         </div>
-//       </div>
-//     </div>
-//   );
-// }
 import React, { useState } from 'react';
 import "../CSS/LoginSignup.css";
 
@@ -118,8 +71,8 @@ export const LoginSignup = () => {
           <button type="submit" className="primary-btn">Sign Up</button>
         </form>
 
-        <p className="loginsignup-login">
-          Already have an account? <span className="link-text">Login here</span>
+       <p className="loginsignup-login">
+          Already have an account?  <a href='/logins'><span className="link-text">Login here</span></a>
         </p>
       </div>
     </div>

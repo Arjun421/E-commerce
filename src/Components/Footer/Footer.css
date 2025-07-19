@@ -1,3 +1,4 @@
+/* Base styles - already good */
 .footer {
   background-color: #1e1e1e;
   color: #fff;
@@ -11,7 +12,7 @@
   justify-content: space-between;
   max-width: 1200px;
   margin: auto;
-  gap: 20px; /* Adds spacing between sections */
+  gap: 20px;
 }
 
 .footer-section {
@@ -45,6 +46,8 @@
   color: #f8b400;
 }
 
+
+
 .social-icons a {
   margin-right: 10px;
   font-size: 20px;
@@ -65,7 +68,7 @@
   color: #aaa;
 }
 
-/* Responsive adjustments */
+/* Medium screens (tablets) */
 @media (max-width: 768px) {
   .footer-container {
     flex-direction: column;
@@ -85,13 +88,27 @@
   }
 }
 
+/* Small screens (phones) */
 @media (max-width: 400px) {
+  .footer {
+    padding: 30px 15px 15px;
+  }
+
   .footer-section ul li {
     font-size: 14px;
+  }
+
+  .footer-section h3,
+  .footer-section h4 {
+    font-size: 18px;
   }
 
   .social-icons a {
     font-size: 18px;
     margin-right: 8px;
+  }
+
+  .footer-bottom {
+    font-size: 12px;
   }
 }

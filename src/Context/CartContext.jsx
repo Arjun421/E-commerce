@@ -10,12 +10,12 @@ export const CartProvider = ({ children }) => {
   // Add item to cart
   const addToCart = (product) => {
     const existingItem = cartItems.find(
-      (item) => item.id === product.id && item.measurement === product.measurement
+      (item) => item.id === product.id && item.size === product.size
     );
 
     if (existingItem) {
       const updatedItems = cartItems.map((item) =>
-        item.id === product.id && item.measurement === product.measurement
+        item.id === product.id && item.size === product.size
           ? { ...item, quantity: item.quantity + 1 }
           : item
       );
@@ -28,16 +28,16 @@ export const CartProvider = ({ children }) => {
   // Remove one unit of item
   const removeFromCart = (product) => {
     const existingItem = cartItems.find(
-      (item) => item.id === product.id && item.measurement === product.measurement
+      (item) => item.id === product.id && item.size === product.size
     );
 
     if (existingItem.quantity === 1) {
       setCartItems(cartItems.filter(
-        (item) => !(item.id === product.id && item.measurement === product.measurement)
+        (item) => !(item.id === product.id && item.size === product.size)
       ));
     } else {
       setCartItems(cartItems.map((item) =>
-        item.id === product.id && item.measurement === product.measurement
+        item.id === product.id && item.size === product.size
           ? { ...item, quantity: item.quantity - 1 }
           : item
       ));
@@ -47,7 +47,7 @@ export const CartProvider = ({ children }) => {
   // Remove item completely
   const removeItemCompletely = (product) => {
     setCartItems(cartItems.filter(
-      (item) => !(item.id === product.id && item.measurement === product.measurement)
+      (item) => !(item.id === product.id && item.size === product.size)
     ));
   };
 

@@ -11,9 +11,12 @@ const ShopCategory = ({ category }) => {
   const [error, setError] = useState(null);
   const [selectedProduct, setSelectedProduct] = useState(null);
   const [selectedSize, setSelectedSize] = useState(null);
+  const [searchTerm, setSearchTerm] = useState('');
+  const [sortType, setSortType] = useState('default');
 
   const { addToCart } = useContext(CartContext);
 
+  // Fetch products
   useEffect(() => {
     fetch('https://fakestoreapi.com/products')
       .then(res => res.json())
@@ -27,28 +30,34 @@ const ShopCategory = ({ category }) => {
       });
   }, []);
 
+  // Filter and Search products
   useEffect(() => {
+    let filtered = [...originalProducts];
+
     if (category) {
-      const filteredProducts = originalProducts.filter(product =>
+      filtered = filtered.filter(product =>
         product.category.toLowerCase() === category.toLowerCase()
       );
-      setProducts(filteredProducts);
-    } else {
-      setProducts(originalProducts);
     }
-  }, [category, originalProducts]);
+
+    if (searchTerm.trim()) {
+      filtered = filtered.filter(product =>
+        product.title.toLowerCase().includes(searchTerm.toLowerCase())
+      );
+    }
+
+    // Sort
+    if (sortType === 'low') {
+      filtered.sort((a, b) => a.price - b.price);
+    } else if (sortType === 'high') {
+      filtered.sort((a, b) => b.price - a.price);
+    }
+
+    setProducts(filtered);
+  }, [category, originalProducts, searchTerm, sortType]);
 
   const handleSortChange = (e) => {
-    const value = e.target.value;
-    let sortedProducts = [...products];
-
-    if (value === 'low') {
-      sortedProducts.sort((a, b) => a.price - b.price);
-    } else if (value === 'high') {
-      sortedProducts.sort((a, b) => b.price - a.price);
-    }
-
-    setProducts(sortedProducts);
+    setSortType(e.target.value);
   };
 
   const openProductDetail = (product) => {
@@ -80,12 +89,26 @@ const ShopCategory = ({ category }) => {
       <h1>🛍️ Store Products</h1>
 
       <div className="shopcategory-indexSort">
-        <p><span>Sort By:</span></p>
-        <select className="shopcategory-sort" onChange={handleSortChange}>
-          <option value="default">Default</option>
-          <option value="low">Price: Low to High</option>
-          <option value="high">Price: High to Low</option>
-        </select>
+        {/* Search Input */}
+        <div className="search-section">
+          <input
+            type="text"
+            placeholder="🔍 Search products..."
+            value={searchTerm}
+            onChange={(e) => setSearchTerm(e.target.value)}
+            className="shopcategory-search"
+          />
+        </div>
+
+        {/* Sort Dropdown */}
+        <div className="sort-section">
+          <p><span>Sort By:</span></p>
+          <select className="shopcategory-sort" onChange={handleSortChange}>
+            <option value="default">Default</option>
+            <option value="low">Price: Low to High</option>
+            <option value="high">Price: High to Low</option>
+          </select>
+        </div>
       </div>
 
       <div className="shopcategory-products">
@@ -104,7 +127,7 @@ const ShopCategory = ({ category }) => {
             </div>
           ))
         ) : (
-          <p>No products found in this category.</p>
+          <p>No products found.</p>
         )}
       </div>
 
@@ -142,7 +165,6 @@ const ShopCategory = ({ category }) => {
           </div>
         </div>
       )}
-
     </div>
   );
 };

@@ -13,9 +13,10 @@ import Return from './Pages/Return';
 import Contact from './Pages/Contact';
 import FAQ from './Pages/FAQ';
 import Support from './Pages/Support';
-import { CartProvider } from './Context/CartContext';  // <-- Updated path here
+import { CartProvider } from './Context/CartContext';  
 import Feedback from './Pages/Feedback';
 import Checkout from './Pages/Checkout';
+import { Login } from './Pages/Login';
 function App() {
   const location = useLocation();
 
@@ -43,9 +44,11 @@ function App() {
           <Route path="/support" element={<Support />} />
           <Route path="/feedback" element={<Feedback />} />
           <Route path="/checkout" element={<Checkout />} />
+          <Route path="/logins" element={<Login />} />
+
         </Routes>
 
-        {/* Conditionally render Footer only if NOT on /cart */}
+        
         {!hideFooter && <Footer />}
       </div>
     </CartProvider>
